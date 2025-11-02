@@ -1,4 +1,4 @@
-﻿import { ethers } from 'ethers';
+import { ethers } from 'ethers';
 
 const CONTRACT_ADDRESSES: Record<number, string> = {
   31337: '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512',
@@ -11,3 +11,11 @@ export function getContractAddress(chainId?: number): string {
   }
   return CONTRACT_ADDRESSES[31337];
 }
+
+
+export async function getContract(signerOrProvider: any, chainId?: number) {
+  const address = getContractAddress(chainId);
+  if (!address) throw new Error('Contract address not set');
+  return new ethers.Contract(address, ABI, signerOrProvider);
+}
+
