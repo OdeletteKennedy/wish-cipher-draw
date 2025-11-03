@@ -13,3 +13,13 @@ To deploy to Vercel:
 3. Configure build settings
 4. Deploy
 
+
+
+### Vercel Deployment
+
+To deploy to Vercel:
+1. Import repository to Vercel
+2. Set root directory to 'ui'
+3. Configure build settings
+4. Deploy
+
