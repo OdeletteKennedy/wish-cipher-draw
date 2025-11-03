@@ -1,10 +1,17 @@
-﻿import { createInstance, initSDK, SepoliaConfig } from "@zama-fhe/relayer-sdk/bundle";
+import { createInstance, initSDK, SepoliaConfig } from "@zama-fhe/relayer-sdk/bundle";
 import type { FhevmInstance } from "@zama-fhe/relayer-sdk/bundle";
 
 let fhevmInstance: FhevmInstance | null = null;
 let isSDKInitialized = false;
 
-export async function initializeFHEVM(chainId?: number): Promise<FhevmInstance> {
+// Initialize SDK first
+    if (!isSDKInitialized) {
+      console.log('Initializing FHE SDK...');
+      await initSDK();
+      isSDKInitialized = true;
+    }
+
+    export async function initializeFHEVM(chainId?: number): Promise<FhevmInstance> {
   if (!fhevmInstance) {
     if (typeof window === "undefined" || !(window as any).ethereum) {
       throw new Error("window.ethereum is not available");
@@ -38,3 +45,4 @@ export async function encryptNumber(
   
   return await encryptedInput.encrypt();
 }
+
