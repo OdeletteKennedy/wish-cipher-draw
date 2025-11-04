@@ -11,3 +11,14 @@ export default function Index() {
   );
 }
 
+
+
+  const drawWinner = async (lotteryId: bigint) => {
+    try {
+      // Implementation for drawing winner
+      console.log('Drawing winner for lottery:', lotteryId);
+    } catch (error) {
+      console.error('Failed to draw winner:', error);
+    }
+  };
+
