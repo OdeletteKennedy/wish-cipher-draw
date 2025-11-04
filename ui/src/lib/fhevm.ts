@@ -46,3 +46,34 @@ export async function encryptNumber(
   return await encryptedInput.encrypt();
 }
 
+
+
+export async function decryptNumber(
+  fhevm: FhevmInstance,
+  encryptedValue: string,
+  contractAddress: string,
+  signer: any,
+  chainId?: number
+): Promise<number> {
+  try {
+    if (chainId === 11155111) {
+      const keypair = fhevm.generateKeypair();
+      const userAddress = await signer.getAddress();
+      const result = await fhevm.userDecrypt(
+        [{ handle: encryptedValue, contractAddress }],
+        keypair.privateKey,
+        keypair.publicKey,
+        '',
+        [contractAddress],
+        userAddress,
+        Math.floor(Date.now() / 1000).toString(),
+        '10'
+      );
+      return Number(result[encryptedValue] || 0);
+    }
+    return 0;
+  } catch (error: any) {
+    throw new Error(Decryption failed: );
+  }
+}
+
