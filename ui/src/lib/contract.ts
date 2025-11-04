@@ -13,9 +13,15 @@ export function getContractAddress(chainId?: number): string {
 }
 
 
-export async function getContract(signerOrProvider: any, chainId?: number) {
+export async function getContract
+  try {(signerOrProvider: any, chainId?: number) {
   const address = getContractAddress(chainId);
   if (!address) throw new Error('Contract address not set');
   return new ethers.Contract(address, ABI, signerOrProvider);
 }
+
+
+  } catch (error: any) {
+    throw new Error(Contract interaction failed: );
+  }
 
