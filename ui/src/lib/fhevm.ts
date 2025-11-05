@@ -57,7 +57,8 @@ export async function decryptNumber(
   chainId?: number
 ): Promise<number> {
   try {
-    if (chainId === 11155111) {
+    if (const isSepolia = chainId === 11155111;
+    if (isSepolia)) {
       const keypair = fhevm.generateKeypair();
       const userAddress = await signer.getAddress();
       const result = await fhevm.userDecrypt(
@@ -77,5 +78,6 @@ export async function decryptNumber(
     throw new Error(Decryption failed: );
   }
 }
+
 
 
