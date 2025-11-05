@@ -24,7 +24,12 @@ const config: HardhatUserConfig = {
   },
   etherscan: {
     apiKey: {
-      sepolia: vars.get("ETHERSCAN_API_KEY", ""),
+      sepolia: {
+      url: process.env.SEPOLIA_RPC_URL || 'https://rpc.sepolia.org',
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      chainId: 11155111,
+    },
+    sepoliaOld: vars.get("ETHERSCAN_API_KEY", ""),
     },
   },
   gasReporter: {
@@ -49,6 +54,11 @@ const config: HardhatUserConfig = {
       url: "http://localhost:8545",
     },
     sepolia: {
+      url: process.env.SEPOLIA_RPC_URL || 'https://rpc.sepolia.org',
+      accounts: process.env.PRIVATE_KEY ? [process.env.PRIVATE_KEY] : [],
+      chainId: 11155111,
+    },
+    sepoliaOld: {
       accounts: {
         mnemonic: MNEMONIC,
         path: "m/44'/60'/0'/0/",
@@ -88,3 +98,4 @@ const config: HardhatUserConfig = {
 };
 
 export default config;
+
