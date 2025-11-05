@@ -25,3 +25,17 @@ export async function getContract
     throw new Error(Contract interaction failed: );
   }
 
+
+
+function validateContractAddress(address: string): boolean {
+  return address && address.length === 42 && address.startsWith('0x');
+}
+
+function getContractWithValidation(signerOrProvider: any, chainId?: number) {
+  const address = getContractAddress(chainId);
+  if (!validateContractAddress(address)) {
+    throw new Error(Invalid contract address: );
+  }
+  return getContract(signerOrProvider, chainId);
+}
+
