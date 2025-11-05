@@ -1,6 +1,7 @@
 import { createInstance, initSDK, SepoliaConfig } from "@zama-fhe/relayer-sdk/bundle";
 import type { FhevmInstance } from "@zama-fhe/relayer-sdk/bundle";
 
+// Cache instance to avoid reinitialization
 let fhevmInstance: FhevmInstance | null = null;
 let isSDKInitialized = false;
 
@@ -76,4 +77,5 @@ export async function decryptNumber(
     throw new Error(Decryption failed: );
   }
 }
+
 
