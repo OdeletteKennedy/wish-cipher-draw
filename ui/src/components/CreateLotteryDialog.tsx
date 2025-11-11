@@ -1,5 +1,4 @@
 ﻿import { useState } from 'react';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 
 interface CreateLotteryDialogProps {
   open: boolean;
@@ -20,12 +19,13 @@ export function CreateLotteryDialog({ open, onOpenChange, onCreate }: CreateLott
     }
   };
 
+  if (!open) return null;
+
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Create New Lottery</DialogTitle>
-        </DialogHeader>
+    <div className="fixed inset-0 z-50">
+      <div className="fixed inset-0 bg-black/50" onClick={() => onOpenChange(false)} />
+      <div className="fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 bg-white p-6 rounded-lg w-96">
+        <h2 className="text-xl font-bold mb-4">Create New Lottery</h2>
         <div className="space-y-4">
           <input
             type="text"
@@ -45,7 +45,7 @@ export function CreateLotteryDialog({ open, onOpenChange, onCreate }: CreateLott
             Create
           </button>
         </div>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 }
