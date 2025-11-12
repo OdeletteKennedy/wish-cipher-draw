@@ -44,11 +44,14 @@ export default function Index() {
     try {
       const fhevm = await initializeFHEVM();
       const contract = await getContract();
-      const encrypted = await encryptNumber(fhevm, contract.address, '', number);
-      await contract.registerParticipant(selectedLottery.id, encrypted.handles[0], encrypted.inputProof);
+      const contractAddress = await contract.getAddress();
+      const encrypted = await encryptNumber(fhevm, contractAddress, '', number);
+      const tx = await contract.registerParticipant(selectedLottery.id, encrypted.handles[0], encrypted.inputProof);
+      await tx.wait();
       await loadLotteries();
     } catch (error) {
       console.error('Failed to register:', error);
+      alert('Registration failed. Please try again.');
     }
   };
 
