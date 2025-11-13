@@ -81,21 +81,30 @@ export default function Index() {
           Create Lottery
         </button>
         <div className="space-y-4">
-          {lotteries.map((lottery) => (
-            <div key={lottery.id} className="border p-4 rounded">
-              <h2 className="text-xl font-semibold">{lottery.name}</h2>
-              <p>Participants: {lottery.participantCount} / {lottery.maxParticipants}</p>
-              <button 
-                onClick={() => {
-                  setSelectedLottery(lottery);
-                  setRegisterDialogOpen(true);
-                }}
-                className="mt-2 px-4 py-2 bg-green-500 text-white rounded"
-              >
-                Register
-              </button>
-            </div>
-          ))}
+          {lotteries.length === 0 ? (
+            <p className="text-gray-500">No lotteries available. Create one to get started!</p>
+          ) : (
+            lotteries.map((lottery) => (
+              <div key={lottery.id} className="border p-4 rounded">
+                <h2 className="text-xl font-semibold">{lottery.name}</h2>
+                <p>Participants: {lottery.participantCount} / {lottery.maxParticipants}</p>
+                <p className="text-sm text-gray-600">
+                  Status: {lottery.isActive ? 'Active' : lottery.isDrawn ? 'Drawn' : 'Inactive'}
+                </p>
+                {lottery.isActive && (
+                  <button 
+                    onClick={() => {
+                      setSelectedLottery(lottery);
+                      setRegisterDialogOpen(true);
+                    }}
+                    className="mt-2 px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+                  >
+                    Register
+                  </button>
+                )}
+              </div>
+            ))
+          )}
         </div>
         <CreateLotteryDialog 
           open={createDialogOpen}
