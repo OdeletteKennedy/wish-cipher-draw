@@ -99,6 +99,7 @@ contract FHELottery is SepoliaConfig {
         address winner
     ) {
         Lottery storage lottery = lotteries[_lotteryId];
+        require(lottery.id > 0, "Lottery does not exist");
         return (
             lottery.id,
             lottery.creator,
