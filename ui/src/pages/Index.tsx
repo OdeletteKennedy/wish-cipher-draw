@@ -19,9 +19,22 @@ export default function Index() {
       const contract = await getContract();
       const count = await contract.getLotteryCount();
       const lotteryList = [];
-      for (let i = 1; i <= count; i++) {
-        const info = await contract.getLotteryInfo(i);
-        lotteryList.push(info);
+      for (let i = 1; i <= Number(count); i++) {
+        try {
+          const info = await contract.getLotteryInfo(i);
+          lotteryList.push({
+            id: Number(info[0]),
+            creator: info[1],
+            name: info[2],
+            maxParticipants: Number(info[3]),
+            participantCount: Number(info[4]),
+            isActive: info[5],
+            isDrawn: info[6],
+            winner: info[7]
+          });
+        } catch (err) {
+          console.warn(`Failed to load lottery ${i}:`, err);
+        }
       }
       setLotteries(lotteryList);
     } catch (error) {
