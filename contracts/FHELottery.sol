@@ -114,6 +114,7 @@ contract FHELottery is SepoliaConfig {
 
     function getWinningNumber(uint256 _lotteryId) external view returns (euint32) {
         Lottery storage lottery = lotteries[_lotteryId];
+        require(lottery.id > 0, "Lottery does not exist");
         require(lottery.isDrawn, "Winner not yet drawn");
         return lottery.winningNumber;
     }
