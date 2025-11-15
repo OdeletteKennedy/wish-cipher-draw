@@ -120,7 +120,9 @@ contract FHELottery is SepoliaConfig {
     }
 
     function isParticipant(uint256 _lotteryId, address _participant) external view returns (bool) {
-        return lotteries[_lotteryId].participants[_participant];
+        Lottery storage lottery = lotteries[_lotteryId];
+        require(lottery.id > 0, "Lottery does not exist");
+        return lottery.participants[_participant];
     }
 
     function getLotteryCount() external view returns (uint256) {
