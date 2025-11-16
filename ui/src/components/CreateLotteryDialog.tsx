@@ -11,11 +11,13 @@ export function CreateLotteryDialog({ open, onOpenChange, onCreate }: CreateLott
   const [maxParticipants, setMaxParticipants] = useState(10);
 
   const handleSubmit = () => {
-    if (name && maxParticipants > 0) {
-      onCreate(name, maxParticipants);
+    if (name.trim() && maxParticipants > 0 && maxParticipants <= 1000) {
+      onCreate(name.trim(), maxParticipants);
       setName('');
       setMaxParticipants(10);
       onOpenChange(false);
+    } else {
+      alert('Please enter a valid name and max participants (1-1000)');
     }
   };
 
