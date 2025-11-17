@@ -31,6 +31,7 @@ contract FHELottery is SepoliaConfig {
     function createLottery(string memory _name, uint256 _maxParticipants) external returns (uint256) {
         require(bytes(_name).length > 0, "Lottery name cannot be empty");
         require(_maxParticipants > 0, "Max participants must be greater than 0");
+        require(_maxParticipants <= 1000, "Max participants cannot exceed 1000");
 
         lotteryCount++;
         Lottery storage newLottery = lotteries[lotteryCount];
