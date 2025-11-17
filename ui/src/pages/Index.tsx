@@ -97,7 +97,7 @@ export default function Index() {
                 <p className="text-sm text-gray-600">
                   Status: {lottery.isActive ? 'Active' : lottery.isDrawn ? 'Drawn' : 'Inactive'}
                 </p>
-                {lottery.isActive && (
+                {lottery.isActive && lottery.participantCount < lottery.maxParticipants && (
                   <button 
                     onClick={() => {
                       setSelectedLottery(lottery);
@@ -107,6 +107,9 @@ export default function Index() {
                   >
                     Register
                   </button>
+                )}
+                {lottery.isActive && lottery.participantCount >= lottery.maxParticipants && (
+                  <p className="mt-2 text-sm text-red-500">Lottery is full</p>
                 )}
               </div>
             ))
