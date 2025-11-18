@@ -61,6 +61,10 @@ export async function decryptNumber(
   chainId?: number
 ): Promise<number> {
   try {
+    if (!encryptedValue || encryptedValue === '0x0000000000000000000000000000000000000000000000000000000000000000') {
+      return 0;
+    }
+    
     const isSepolia = chainId === 11155111;
     if (isSepolia) {
       const keypair = fhevm.generateKeypair();
