@@ -78,12 +78,21 @@ export default function Index() {
     <div className="container mx-auto px-4 py-8">
       <div className="max-w-4xl mx-auto p-4">
         <h1 className="text-2xl font-bold mb-4">Encrypted Number Lottery</h1>
-        <button 
-          onClick={() => setCreateDialogOpen(true)}
-          className="mb-4 px-4 py-2 bg-blue-500 text-white rounded"
-        >
-          Create Lottery
-        </button>
+        <div className="mb-4 flex gap-2">
+          <button 
+            onClick={() => setCreateDialogOpen(true)}
+            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          >
+            Create Lottery
+          </button>
+          <button 
+            onClick={loadLotteries}
+            className="px-4 py-2 bg-gray-500 text-white rounded hover:bg-gray-600"
+            disabled={loading}
+          >
+            Refresh
+          </button>
+        </div>
         <div className="space-y-4">
           {loading ? (
             <p className="text-gray-500">Loading lotteries...</p>
