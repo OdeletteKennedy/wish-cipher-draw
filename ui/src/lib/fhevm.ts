@@ -28,7 +28,7 @@ export interface FhevmInstance {
 
 // Mock instance for local network
 class MockFhevmInstance implements FhevmInstance {
-  createEncryptedInput(contractAddress: string, userAddress: string) {
+  createEncryptedInput(_contractAddress: string, _userAddress: string) {
     return {
       add32: (value: number) => ({
         encrypt: async () => {
@@ -104,6 +104,10 @@ export async function initializeFHEVM(chainId?: number): Promise<FhevmInstance> 
     };
 
     fhevmInstance = await sdk.createInstance(config);
+  }
+
+  if (!fhevmInstance) {
+    throw new Error("Failed to initialize FHEVM instance");
   }
 
   return fhevmInstance;

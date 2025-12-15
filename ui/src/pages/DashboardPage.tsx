@@ -17,8 +17,6 @@ import { Ticket, Users, Trophy, TrendingUp, Activity, Target } from 'lucide-reac
 import { useLottery } from '../context/LotteryContext';
 import { useWallet } from '../context/WalletContext';
 
-const COLORS = ['#6366f1', '#d946ef', '#22c55e', '#f59e0b'];
-
 export default function DashboardPage() {
   const { stats, lotteries, loading } = useLottery();
   const { isConnected } = useWallet();
